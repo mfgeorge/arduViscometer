@@ -3,7 +3,7 @@
 #define MIDDLE_SENSOR   A1 
 #define BOTTOM_SENSOR   A0
 
-#define THRESHHOLD      50
+#define THRESHHOLD      450
 #define TIMEOUT         60000
 
 // Function Prototypes
@@ -149,24 +149,24 @@ IRSensorPoller::IRSensorPoller(uint16_t threshold,
 
 void IRSensorPoller::run(){
    // Get average ambient input from each sensor
-   uint16_t averageBuffer [1000][3];
-   for(uint16_t row=0; row<1000; row++){
-      for(uint8_t column=0; column<3; column++){
-         averageBuffer[row][column] = analogRead(TOP_SENSOR-column);
-      }
-   }
-   uint32_t sum = 0;
-   for(uint8_t column=0; column<3; column++){
-      for(uint16_t row=0; row<1000; row++){
-         sum += averageBuffer[row][column];
-      }
-      uint32_t average = sum/1000;
-      this->thresholdArray[column] = uint16_t(average) - this->threshold;
-      Serial.print("Sensor ");
-      Serial.print(column);
-      Serial.print(" Threshold:\t ");
-      Serial.println(this->thresholdArray[column]);
-   }
+   // uint16_t averageBuffer [1000][3];
+   // for(uint16_t row=0; row<1000; row++){
+   //    for(uint8_t column=0; column<3; column++){
+   //       averageBuffer[row][column] = analogRead(TOP_SENSOR-column);
+   //    }
+   // }
+   // uint32_t sum = 0;
+   // for(uint8_t column=0; column<3; column++){
+   //    for(uint16_t row=0; row<1000; row++){
+   //       sum += averageBuffer[row][column];
+   //    }
+   //    uint32_t average = sum/1000;
+   //    this->thresholdArray[column] = uint16_t(average) - this->threshold;
+   //    Serial.print("Sensor ");
+   //    Serial.print(column);
+   //    Serial.print(" Threshold:\t ");
+   //    Serial.println(this->thresholdArray[column]);
+   // }
 
    bool runFlag = true;
    while(runFlag){
@@ -218,7 +218,7 @@ void IRSensorPoller::run(){
 uint16_t IRSensorPoller::pollSensor(int pin){
    uint16_t pollStart = millis();
    uint16_t reading;
-   uint16_t sensorThreshold = this->thresholdArray[TOP_SENSOR-pin];
+   uint16_t sensorThreshold = this->threshold; // this->thresholdArray[TOP_SENSOR-pin];
    while( (uint16_t(millis()) - pollStart < this->timeout) || this->firstRun){
       if ((reading = analogRead(pin)) < sensorThreshold){
          Serial.print("Pin ");
