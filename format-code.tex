@@ -1,0 +1,40 @@
+% ------------------------------------------------------------------------%
+%           PRE-AMBLE TO THE DOCUMENT                         %
+% ------------------------------------------------------------------------%
+
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{listings}
+
+% Set margin size
+\usepackage{geometry}
+\usepackage{xcolor}
+\geometry{top=1in, bottom=0.8in, left=.5in, right=.5in}
+\begin{document}
+
+%% Source Code 
+\lstset{
+basicstyle=\ttfamily\tiny,                  % Code font, Examples: \footnotesize, \ttfamily
+numbers=left,                           % Line nums position
+numberstyle=\tiny,                      % Line-numbers fonts
+stepnumber=1,                           % Step between two line-numbers
+numbersep=5pt,                          % How far are line-numbers from code
+frame=none,                             % A frame around the code
+tabsize=3,                              % Default tab size
+captionpos=b,                           % Caption-position = bottom
+breaklines=true,                        % Automatic line breaking?
+breakatwhitespace=false,                % Automatic breaks only at whitespace?
+showspaces=false,                       % Dont make spaces visible
+showtabs=false,                         % Dont make tabls visible
+language=C++,
+keywordstyle=\color{blue},
+stringstyle=\color{red},
+commentstyle=\color{gray},
+morecomment=[l][\color{darkgray}]{\#}
+}
+
+\section*{Source Code: Arduino Viscosity Measurement Program}
+\lstinputlisting{measureViscosity.ino}
+
+\end{document}
